@@ -45,7 +45,9 @@ func (c Chain) Kinds() []string {
 //
 // 返回的链持有独立存储：对同一 base 多次 Fork，各条链互不覆盖。
 func Fork(base []model.Link, extra model.Link) []model.Link {
-	return append(base, extra)
+	out := make([]model.Link, len(base), len(base)+1)
+	copy(out, base)
+	return append(out, extra)
 }
 
 // Builder 逐步构建溯源链前缀。
